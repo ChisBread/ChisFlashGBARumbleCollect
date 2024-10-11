@@ -10,7 +10,7 @@ depatcher
 
 `gcc -g depatcher.c payload_bin.c -o b.out`
 
-`x86_64-w64-mingw32-gcc -g patcher.c payload_bin.c -static-libgcc -static-libstdc++ -static -o b.exe`
+`x86_64-w64-mingw32-gcc -g depatcher.c payload_bin.c -static-libgcc -static-libstdc++ -static -o b.exe`
 
 ## Credits
 
