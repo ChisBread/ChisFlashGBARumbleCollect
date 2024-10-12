@@ -158,6 +158,10 @@ int main(int argc, char **argv)
     puts("Enter the address of the ROM you want to patch(e.g. 0x08000000):");
     puts("Enter 'q' to finish:");
     uint32_t rom_addr_to_patch[1024] = {0}; // 0存储地址个数
+    uint32_t rom_addr_to_patch_priority[1024] = {0}; // 1代表高地址优先，0代表低地址优先
+    memset(rom_addr_to_patch, 0, sizeof(rom_addr_to_patch));
+    memset(rom_addr_to_patch_priority, 0, sizeof(rom_addr_to_patch_priority));
+
     int i = 0;
     while (1)
     {
@@ -166,6 +170,22 @@ int main(int argc, char **argv)
         if (addr[0] == 'q')
         {
             break;
+        }
+        if (addr[0] == 'H' || addr[0] == 'h')
+        {
+            rom_addr_to_patch_priority[i + 1] = 1;
+            for (int j = 0; j < 31; j++)
+            {
+                addr[j] = addr[j + 1];
+            }
+        }
+        if (addr[0] == 'L' || addr[0] == 'l')
+        {
+            rom_addr_to_patch_priority[i + 1] = 0;
+            for (int j = 0; j < 31; j++)
+            {
+                addr[j] = addr[j + 1];
+            }
         }
         for (int j = 0; j < 32; j++)
         {
@@ -197,15 +217,31 @@ int main(int argc, char **argv)
         printf("--------------- Patching thumb address %08x ---------------\n", patch_addr);
         // Find a location to insert the payload immediately before a 0x1000 byte sector
         uint32_t payload_base_p = -1, payload_base = -1;
-        // 在patch_addr左右两侧，找一片空间，大小为payload_bin_len+0x16
+        // 在patch_addr左右两侧，找一片空间，大小为payload_bin_len+0x64
         // 空间内的数据都是0xff或者0x00
         // 范围是正负0x400000
-        for (payload_base_p = patch_addr>0x400000?patch_addr-0x400000:0;
-                        payload_base_p < patch_addr+0x400000-(payload_bin_len+0x16) 
-                        && payload_base_p >= 0 && payload_base_p < romsize; payload_base_p+=4) 
+        uint32_t end_pos = patch_addr+0x400000-(payload_bin_len+0x64);
+        uint32_t start_pos = patch_addr>0x400000?patch_addr-0x400000:0;
+        uint32_t delta = 4;
+        if (end_pos > romsize) {
+            end_pos = romsize;
+        }
+        // 高地址优先
+        if (rom_addr_to_patch_priority[i + 1] == 1)
+        {
+            end_pos = patch_addr>0x400000?patch_addr-0x400000:0;
+            start_pos = patch_addr+0x400000-(payload_bin_len+0x64);
+            delta = -4;
+            if (start_pos > romsize) {
+                start_pos = romsize;
+            }
+        }
+        for (payload_base_p = start_pos;
+                        (rom_addr_to_patch_priority[i + 1] == 1 && payload_base_p >= end_pos) || (rom_addr_to_patch_priority[i + 1] == 0 && payload_base_p <= end_pos)
+                        && payload_base_p >= 0 && payload_base_p <= romsize; payload_base_p+=delta)
         {
             int is_all_zeroes = 1, is_all_ones = 1;
-            for (int k = 0; k < payload_bin_len+0x16 && payload_base_p + k >= 0 && payload_base_p + k < romsize; k++)
+            for (int k = 0; k < payload_bin_len+0x64 && payload_base_p + k >= 0 && payload_base_p + k < romsize; k++)
             {
                 if (rom[payload_base_p + k] != 0)
                 {
@@ -218,7 +254,7 @@ int main(int argc, char **argv)
             }
             if (is_all_zeroes || is_all_ones)
             {
-                payload_base = payload_base_p + 0x8;
+                payload_base = payload_base_p + 0x32;
                 break;
             }
         }
@@ -245,13 +281,13 @@ int main(int argc, char **argv)
                 tail_space++;
             }
             printf("Tail space: %x\n", tail_space);
-            if (romsize + (payload_bin_len+0x16 - tail_space) > 0x2000000) {
+            if (romsize + (payload_bin_len+0x64 - tail_space) > 0x2000000) {
                 puts("No space found to insert payload");
                 return pause_exit(argc, argv);
             }
             // 扩容
-            romsize += payload_bin_len+0x16 - tail_space;
-            payload_base = romsize - (payload_bin_len+0x8);
+            romsize += payload_bin_len+0x64 - tail_space;
+            payload_base = romsize - (payload_bin_len+0x32);
             printf("Expanding ROM to %x bytes\n", romsize);
         }
         printf("BL jump offset: %08x\n", payload_base > patch_addr ? payload_base - patch_addr : patch_addr - payload_base);
