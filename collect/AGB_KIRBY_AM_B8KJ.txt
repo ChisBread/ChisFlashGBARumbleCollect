@@ -1,8 +1,8 @@
-# 星之卡比震动点位
-0x0804A91E#掉血, damage
-0x08123012#回血, heal
-0x0805C178#变身, transform
-0x08054F60#吐出, spit out
-0x08054ADA#力竭, exhausted
-0x08099B64#击杀, kill
+#星之卡比震动点位
+0x0804A91E#掉血,damage
+0x08123012#回血,heal
+0x0805C178#变身,transform
+0x08054F60#吐出,spitout
+0x08054ADA#力竭,exhausted
+0x08099B64#击杀,kill
 q
