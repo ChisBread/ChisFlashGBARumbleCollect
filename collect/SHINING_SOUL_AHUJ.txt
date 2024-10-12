@@ -1,0 +1,5 @@
+# 光明之魂1震动点位
+0x080085f4#普攻震动, attack
+0x03004584#蓄力震动, accumulator attack
+0x08017624#被击震动, be attacked
+q
