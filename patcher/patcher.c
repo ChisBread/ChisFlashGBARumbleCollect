@@ -29,6 +29,7 @@ int pause_exit(int argc, char **argv)
 
 static inline char* get_rom_identifier(char* rombuffer, int romsize) {
     char* game_title_raw = (char*)malloc(18);
+    memset(game_title_raw, 0, 18);
     for (int i = 0xA0; i < 0xAC; i++) {
         game_title_raw[i - 0xA0] = rombuffer[i];
         if (game_title_raw[i - 0xA0] == '\x00' || game_title_raw[i - 0xA0] == '\n' || game_title_raw[i - 0xA0] == ' ') {
@@ -51,8 +52,8 @@ static inline char* get_rom_identifier(char* rombuffer, int romsize) {
     }
     // 去掉连续的_，替换为单个_
     for (int i = 0; i < 18; i++) {
-        if (game_title_raw[i] == '_' && game_title_raw[i + 1] == '_') {
-            for (int j = i; j < 18; j++) {
+        while (game_title_raw[i] == '_' && game_title_raw[i + 1] == '_') {
+            for (int j = i; j < 18 && game_title_raw[j] != '\0'; j++) {
                 game_title_raw[j] = game_title_raw[j + 1];
             }
         }
@@ -135,6 +136,7 @@ int main(int argc, char **argv)
 
     char *game_title = get_rom_identifier(rom, romsize);
     printf("Game title: %s\n", game_title);
+    printf("ROM size: %x\n", romsize);
     free(game_title);
 
     // Check if ROM already patched.
