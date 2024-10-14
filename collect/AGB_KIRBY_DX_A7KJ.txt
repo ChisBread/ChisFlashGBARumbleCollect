@@ -1,0 +1,5 @@
+# 星之卡比 - 梦之泉 震动点位
+0x08009b6A#HP变化, HP change
+0x08009c90#分数变化, scores change
+0x08009c16#形态变化, transform
+q
