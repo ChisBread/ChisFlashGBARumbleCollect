@@ -1,0 +1,6 @@
+# 神游之密特罗德 - 零点任务 震动点位
+0x080111b4#体力受伤减少, HP reduction
+0x08015ab4#体力受伤回复, HP Recovery
+0x080548ca#使用减少, Missile reduction
+0x08015ad2#恢复增加, Missile Recovery
+q
