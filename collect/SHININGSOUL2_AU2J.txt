@@ -1,0 +1,7 @@
+# 光明之魂2震动点位
+0x0800dfbe#普攻震动, normal attack
+0x0800e6e8#蓄力震动, accumulator attack
+0x08020a6c#被击震动, be attacked
+0x0801c8ac#EXP增加, get exp
+0x0801c8bc#升级, level up
+q
