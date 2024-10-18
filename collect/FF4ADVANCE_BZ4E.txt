@@ -1,0 +1,4 @@
+# 最终幻想4 震动点位
+0x0808832a#战斗中,我方收到攻击, allies be attacked
+0x0808824a#战斗中,敌人收到攻击, enemy be attacked
+q
