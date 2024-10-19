@@ -1,0 +1,4 @@
+# 超级机器人大战A 震动点位
+0x080343c6#使用SP震动, USE SP SKILL
+0x0804ab40#我方/敌方受伤震动, allie & enemy be attacked
+q
