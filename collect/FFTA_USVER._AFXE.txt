@@ -1,0 +1,3 @@
+# 最终幻想_战略版 震动点位
+0x080a8df6#我方\敌方受到攻击震动, allies and enemys be attacked
+q
