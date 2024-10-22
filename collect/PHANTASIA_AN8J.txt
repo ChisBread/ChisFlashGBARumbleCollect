@@ -1,0 +1,4 @@
+#幻想传说 震动点位
+0x08047070#我方受到攻击震动,allie be attacked
+0x08044dea#敌方受到攻击震动,enemy be attacked
+q
