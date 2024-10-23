@@ -1,0 +1,6 @@
+# 神游之密特罗德 - 融合 震动点位
+0x0800ffde#体力受伤减少, HP reduction
+0x08012524#体力回复, HP Recovery
+0x08085c0a#导弹减少, Missile reduction
+0x08012550#导弹增加, Missile Recovery
+q
