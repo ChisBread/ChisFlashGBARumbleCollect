@@ -1,0 +1,5 @@
+# 口袋妖怪 - 绿宝石RogueV2.01A 震动点位
+0x08079eec#敌我双方出招&被攻击震动, allie & enemy ,use skill and be attacked during the fight
+0x08052814#收服震动, capture new PM
+0x081e78de#获得道具&学会新招式震动, get new item or learn new skill
+q
