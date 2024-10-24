@@ -1,0 +1,5 @@
+#机器人大战R 震动点位
+0x08041cf2#战斗中,敌方&我方受伤,爆炸震动, allie or enemy be attacked or boom,during the fight.
+0x0801be28#大地图 坠机震动,enemy explosion at map.
+0x0802089a#使用SP技能震动,use sp skill.
+q
