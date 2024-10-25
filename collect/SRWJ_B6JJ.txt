@@ -1,3 +1,4 @@
-#机战J
-0x08056544#主角?血量,damage
+# 机器人大战J 震动点位
+0x08047b02#使用SP技能震动,use sp skill
+0x0806c850#战斗中,敌方&我方受伤,爆炸震动, allie or enemy be attacked
 q
