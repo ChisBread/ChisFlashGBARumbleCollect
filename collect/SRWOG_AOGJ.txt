@@ -1,0 +1,4 @@
+# 机器人大战OG 震动点位
+0x0801383e#使用SP技能震动,use sp skill
+0x08044236#战斗中,敌方&我方受伤,爆炸震动, allie or enemy be attacked
+q
