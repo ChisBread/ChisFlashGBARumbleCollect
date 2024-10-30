@@ -15,4 +15,4 @@ depatcher
 ## Credits
 
 Thanks to
-- [ez-flash](https://github.com/metroid-maniac/gba-auto-batteryless-patcher) 
+- [gba-auto-batteryless-patcher](https://github.com/metroid-maniac/gba-auto-batteryless-patcher) 
