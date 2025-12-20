@@ -1,0 +1,4 @@
+#MinishCap(EU)
+P80H0x080522D4#HPChange
+P80H0x0805230A#RupeesChange
+q
